@@ -41,7 +41,9 @@ def draw_workflow(directory: Path) -> None:
                     arrowprops={"arrowstyle": "->", "color": BLUE, "lw": 1.1})
     ax.set_title("Analysis workflow", loc="left", color=NAVY, fontsize=9)
     for suffix in ("png", "pdf", "svg"):
-        fig.savefig(directory / f"figure0_workflow.{suffix}", bbox_inches="tight", pad_inches=0.04, dpi=350)
+        target = directory / suffix
+        target.mkdir(parents=True, exist_ok=True)
+        fig.savefig(target / f"figure0_workflow.{suffix}", bbox_inches="tight", pad_inches=0.04, dpi=350)
     plt.close(fig)
 
 

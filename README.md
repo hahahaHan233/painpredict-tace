@@ -6,7 +6,7 @@ PainPredict-TACE estimates the probability that a patient will report a numeric 
 
 > **Research use only.** The model was developed in a single centre and assessed by repeated internal validation. It has not been externally validated or evaluated prospectively, and it should not be used on its own to make clinical decisions.
 
-![Analysis workflow](figures/figure0_workflow.png)
+![Analysis workflow](figures/png/figure0_workflow.png)
 
 ## Contents
 
@@ -141,13 +141,13 @@ risk = 1 / (1 + exp(-linear predictor))
 
 When a laboratory value is missing, substitute the median (D-dimer 226 ng/mL, AFP 5.23 ng/mL, albumin 40.0 g/L) and add its missing-indicator coefficient (D-dimer −1.34795, AFP −0.07461, albumin −2.08777). `painpredict.formula_risk()` implements this calculation, and the tests check that it matches the fitted pipeline. Full-precision terms are in [`results/raw_scale_equation.csv`](results/raw_scale_equation.csv) and in `model_card.json`.
 
-![Nomogram](figures/figure6_nomogram.png)
+![Nomogram](figures/png/figure6_nomogram.png)
 
-To redraw the nomogram, run `painpredict nomogram -o figures`.
+To redraw the nomogram, run `painpredict nomogram -o figures`. Files are written to `figures/png`, `figures/pdf` and `figures/svg`.
 
 ## Figures
 
-All figures are provided as PNG, PDF and SVG in [`figures/`](figures).
+Figures are grouped by file type under [`figures/png`](figures/png), [`figures/pdf`](figures/pdf) and [`figures/svg`](figures/svg).
 
 | Figure | Content |
 | --- | --- |
@@ -162,8 +162,8 @@ All figures are provided as PNG, PDF and SVG in [`figures/`](figures).
 Figures 1–5 were produced from individual-level data and are provided as released. Figures 0 and 6 can be regenerated with `python scripts/make_figures.py`.
 
 <p align="center">
-  <img src="figures/figure3_model_comparison.png" width="48%" alt="Model comparison">
-  <img src="figures/figure4_oof_diagnostics.png" width="48%" alt="OOF diagnostics">
+  <img src="figures/png/figure3_model_comparison.png" width="48%" alt="Model comparison">
+  <img src="figures/png/figure4_oof_diagnostics.png" width="48%" alt="OOF diagnostics">
 </p>
 
 ## Validating the model specification on your own data
@@ -193,7 +193,8 @@ painpredict validate synthetic.csv -o runs/demo --repeats 1 --bootstrap 200
 src/painpredict/      Python package (prediction, validation, nomogram, CLI)
   assets/             Fitted pipeline (model.joblib) and model_card.json
 results/              Cohort-level result tables from the development study
-figures/              Paper figures (PNG, PDF, SVG)
+figures/              Paper figures, one folder per format
+  png/ pdf/ svg/
 examples/             Example input and synthetic demonstration cohort
 scripts/              Figure regeneration
 tests/                Test suite (runs on synthetic data only)

@@ -88,7 +88,7 @@ def build_parser() -> argparse.ArgumentParser:
     synth.add_argument("--seed", type=int, default=1)
     synth.set_defaults(func=_synth)
 
-    nomogram = commands.add_parser("nomogram", help="draw the points nomogram (PNG, PDF, SVG)")
+    nomogram = commands.add_parser("nomogram", help="draw the points nomogram into png, pdf and svg subfolders")
     nomogram.add_argument("-o", "--output", default="figures")
     nomogram.set_defaults(func=_nomogram)
     return parser

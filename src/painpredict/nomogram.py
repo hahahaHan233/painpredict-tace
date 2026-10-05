@@ -48,7 +48,7 @@ def points_table(n_values: int = 201) -> tuple[pd.DataFrame, float, float]:
 
 
 def draw_nomogram(directory: str | Path, stem: str = "figure6_nomogram") -> pd.DataFrame:
-    """Save the nomogram as PNG, PDF and SVG and return the points table."""
+    """Save the nomogram under directory/png, directory/pdf and directory/svg."""
 
     import matplotlib.pyplot as plt
 
@@ -97,8 +97,9 @@ def draw_nomogram(directory: str | Path, stem: str = "figure6_nomogram") -> pd.D
     ax.text(-34, -0.55, FOOTNOTE, fontsize=6.6, **serif)
 
     directory = Path(directory)
-    directory.mkdir(parents=True, exist_ok=True)
     for suffix in ("png", "pdf", "svg"):
-        fig.savefig(directory / f"{stem}.{suffix}", bbox_inches="tight", pad_inches=0.05, dpi=350)
+        target = directory / suffix
+        target.mkdir(parents=True, exist_ok=True)
+        fig.savefig(target / f"{stem}.{suffix}", bbox_inches="tight", pad_inches=0.05, dpi=350)
     plt.close(fig)
     return table
