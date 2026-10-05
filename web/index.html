@@ -9,6 +9,7 @@
 </head>
 <body>
   <header class="site-header">
+    <div class="page-width header-inner">
     <div>
       <p class="kicker" data-i18n="app.kicker">Clinical prediction model</p>
       <h1 data-i18n="app.title">PainPredict-TACE</h1>
@@ -18,8 +19,10 @@
       <button type="button" data-locale="en" aria-pressed="true">English</button>
       <button type="button" data-locale="zh" aria-pressed="false">中文</button>
     </div>
+    </div>
   </header>
 
+  <div class="page-width">
   <p class="notice" data-i18n="app.research">Research use only. This model was developed in one centre and assessed by repeated internal validation. It has not been externally validated or tested prospectively, and it must not be used alone to make clinical decisions.</p>
 
   <main class="layout">
@@ -109,6 +112,7 @@
   <noscript>
     <p>JavaScript is required to load the published model card and calculate a probability in this browser.</p>
   </noscript>
+  </div>
   <script type="module" src="app.js"></script>
 </body>
 </html>
