@@ -1,0 +1,223 @@
+{
+  "name": "PainPredict-TACE four-variable ridge logistic model",
+  "version": "1.0.0",
+  "outcome": "Numeric rating scale (NRS) pain score >= 4 at 24 hours after transarterial chemoembolization (TACE)",
+  "predictors": [
+    {
+      "column": "Pre_PainScore",
+      "description": "Preprocedural pain, NRS 0-10"
+    },
+    {
+      "column": "D-dimer",
+      "description": "D-dimer, ng/mL (FEU/DDU convention not specified)"
+    },
+    {
+      "column": "AFP",
+      "description": "Alpha-fetoprotein, ng/mL"
+    },
+    {
+      "column": "Albumin",
+      "description": "Albumin, g/L"
+    }
+  ],
+  "estimator": {
+    "type": "L2-penalized (ridge) logistic regression",
+    "preprocessing": "IQR capping (1.5 x IQR), median imputation with missing indicators, standardization",
+    "C": 0.13894954943731375,
+    "C_grid": "logspace(-3, 2, 8), tuned by log loss"
+  },
+  "equation": {
+    "scale": "raw predictor units; risk = 1 / (1 + exp(-linear_predictor))",
+    "intercept": -0.2529838630880812,
+    "terms": [
+      {
+        "variable": "Pre_PainScore",
+        "coefficient": 1.2906610998770325,
+        "missing_coefficient": 0.0,
+        "median": 0.0,
+        "cap_lower": null,
+        "cap_upper": null
+      },
+      {
+        "variable": "D-dimer",
+        "coefficient": 0.0016481096017407,
+        "missing_coefficient": -1.3479489818130492,
+        "median": 226.0,
+        "cap_lower": -374.0,
+        "cap_upper": 962.0
+      },
+      {
+        "variable": "AFP",
+        "coefficient": 0.0050128343518368,
+        "missing_coefficient": -0.0746083413265047,
+        "median": 5.23,
+        "cap_lower": -86.6875,
+        "cap_upper": 152.5725
+      },
+      {
+        "variable": "Albumin",
+        "coefficient": -0.0590836834396309,
+        "missing_coefficient": -2.087768530330179,
+        "median": 40.0,
+        "cap_lower": 22.95,
+        "cap_upper": 55.35000000000001
+      }
+    ]
+  },
+  "standardized_coefficients": [
+    {
+      "term": "Pre_PainScore",
+      "beta": 0.6920247222729042,
+      "odds_ratio_per_sd": 1.9977563428672565,
+      "odds_ratio_ci_low": 1.6375621356203105,
+      "odds_ratio_ci_high": 2.556213168741142
+    },
+    {
+      "term": "D-dimer",
+      "beta": 0.4122156657535701,
+      "odds_ratio_per_sd": 1.5101600910252424,
+      "odds_ratio_ci_low": 1.220714627396156,
+      "odds_ratio_ci_high": 1.8899835941388927
+    },
+    {
+      "term": "AFP",
+      "beta": 0.2930899348527517,
+      "odds_ratio_per_sd": 1.3405633483777604,
+      "odds_ratio_ci_low": 1.0480588766804448,
+      "odds_ratio_ci_high": 1.6735780912014602
+    },
+    {
+      "term": "Albumin",
+      "beta": -0.3144869055958644,
+      "odds_ratio_per_sd": 0.7301634209373273,
+      "odds_ratio_ci_low": 0.560961363825518,
+      "odds_ratio_ci_high": 0.9093335854699848
+    },
+    {
+      "term": "missingindicator_D-dimer",
+      "beta": -0.356864451130358,
+      "odds_ratio_per_sd": 0.6998673575346096,
+      "odds_ratio_ci_low": 0.4849800437515537,
+      "odds_ratio_ci_high": 0.9996087347889736
+    },
+    {
+      "term": "missingindicator_AFP",
+      "beta": -0.0175779990994257,
+      "odds_ratio_per_sd": 0.982575592664724,
+      "odds_ratio_ci_low": 0.7644714037373083,
+      "odds_ratio_ci_high": 1.2186164717167869
+    },
+    {
+      "term": "missingindicator_Albumin",
+      "beta": -0.110495992090029,
+      "odds_ratio_per_sd": 0.8953899188244782,
+      "odds_ratio_ci_low": 0.8020824051928691,
+      "odds_ratio_ci_high": 0.9167583890900048
+    }
+  ],
+  "nomogram_ranges": {
+    "Pre_PainScore": [
+      0.0,
+      3.0
+    ],
+    "D-dimer": [
+      14.0,
+      962.0
+    ],
+    "AFP": [
+      1.05,
+      152.5725
+    ],
+    "Albumin": [
+      24.1,
+      55.35000000000001
+    ]
+  },
+  "development": {
+    "design": "Single-centre retrospective cohort",
+    "patients": 356,
+    "events": 74,
+    "validation": "Repeated nested cross-validation: 5 repeats x 5 stratified outer folds, 4-fold inner tuning; all preprocessing fitted within training folds",
+    "uncertainty": "Patient-level bootstrap, 2000 resamples",
+    "out_of_fold_performance": {
+      "auc": {
+        "estimate": 0.7997412305922945,
+        "ci_low": 0.730811144159134,
+        "ci_high": 0.8630682913999348
+      },
+      "pr_auc": {
+        "estimate": 0.5900912653383914,
+        "ci_low": 0.476129021719702,
+        "ci_high": 0.7150953791928106
+      },
+      "brier": {
+        "estimate": 0.1202200235372865,
+        "ci_low": 0.0984476183422738,
+        "ci_high": 0.1448391706595657
+      },
+      "calibration_intercept": {
+        "estimate": 0.0056695691817934,
+        "ci_low": -0.4075487205613071,
+        "ci_high": 0.4525769018099267
+      },
+      "calibration_slope": {
+        "estimate": 1.0115528515055463,
+        "ci_low": 0.7563023144423373,
+        "ci_high": 1.3265824570017306
+      },
+      "at_risk_0.20": {
+        "sensitivity": {
+          "estimate": 0.7297297297297297,
+          "ci_low": 0.625,
+          "ci_high": 0.8289473684210527
+        },
+        "specificity": {
+          "estimate": 0.7730496453900709,
+          "ci_low": 0.7253501779910231,
+          "ci_high": 0.8227005762411347
+        },
+        "ppv": {
+          "estimate": 0.4576271186440678,
+          "ci_low": 0.3684210526315789,
+          "ci_high": 0.5468783386752136
+        },
+        "npv": {
+          "estimate": 0.9159663865546218,
+          "ci_low": 0.8765432098765432,
+          "ci_high": 0.9504141538232448
+        }
+      }
+    }
+  },
+  "model_selection": {
+    "reference": "Six-variable ridge model (four predictors + age + Child-Pugh grade)",
+    "criteria": {
+      "paired_delta_auc_ci_low_greater_than": -0.02,
+      "paired_delta_brier_ci_high_less_than": 0.005,
+      "calibration_slope_range": [
+        0.8,
+        1.2
+      ],
+      "min_net_benefit_difference_thresholds_0.10_to_0.30": -0.01,
+      "tie_breaking": [
+        "fewer predictors",
+        "lower summed missing fraction",
+        "lower Brier score"
+      ]
+    },
+    "result": "The four-variable model met all criteria with the fewest predictors."
+  },
+  "intended_use": "Research use: estimating the preprocedural probability of NRS >= 4 at 24 hours after TACE.",
+  "limitations": [
+    "Developed and internally validated in one centre; no external validation.",
+    "Associations are predictive, not causal.",
+    "Not evaluated prospectively; not a substitute for clinical judgement.",
+    "Preprocedural NRS ranged 0-3 in the development cohort; higher values are extrapolations.",
+    "Values beyond the capping bounds receive the bound's contribution."
+  ],
+  "artifact": {
+    "file": "model.joblib",
+    "sha256": "ba911ed405dc42a9bdbd795863368c624452b2aa569812579488dcfe1b988c48",
+    "scikit_learn": "1.5.1"
+  }
+}

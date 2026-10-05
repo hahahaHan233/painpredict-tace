@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below and cite the accompanying article."
+title: "PainPredict-TACE: preprocedural risk model for NRS >= 4 pain 24 hours after TACE"
+type: software
+version: 1.0.0
+license: MIT
+repository-code: "https://github.com/hahahaHan233/painpredict-tace"
+authors:
+  - name: "PainPredict-TACE contributors"
+keywords:
+  - clinical prediction model
+  - transarterial chemoembolization
+  - postprocedural pain
+  - ridge logistic regression
+  - nomogram

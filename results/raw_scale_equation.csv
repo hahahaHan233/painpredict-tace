@@ -1,0 +1,8 @@
+term,source_variable,raw_scale_coefficient,cap_lower,cap_upper,imputation_value
+Pre_PainScore,Pre_PainScore,1.2906610998770325,-inf,inf,0.0
+D-dimer,D-dimer,0.0016481096017407,-374.0,962.0,226.0
+AFP,AFP,0.0050128343518368,-86.6875,152.5725,5.23
+Albumin,Albumin,-0.0590836834396309,22.95,55.35000000000001,40.0
+missingindicator_D-dimer,D-dimer,-1.3479489818130492,-374.0,962.0,
+missingindicator_AFP,AFP,-0.0746083413265047,-86.6875,152.5725,
+missingindicator_Albumin,Albumin,-2.087768530330179,22.95,55.35000000000001,

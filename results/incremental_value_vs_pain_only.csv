@@ -1,0 +1,2 @@
+comparison,delta_auc,delta_brier,delta_auc_ci_low,delta_auc_ci_high,delta_brier_ci_low,delta_brier_ci_high,bootstrap_resamples
+Four-variable ridge vs preprocedural pain only,0.1439285029710563,-0.012447589123804,0.0548262495589931,0.2387197857072537,-0.0240975931371801,-0.0014439495773492,2000

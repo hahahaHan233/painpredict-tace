@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "painpredict-tace"
+version = "1.0.0"
+description = "Preprocedural risk model for NRS >= 4 pain 24 hours after transarterial chemoembolization (TACE)"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+keywords = ["clinical prediction model", "TACE", "hepatocellular carcinoma", "postprocedural pain", "nomogram"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+]
+dependencies = [
+    "scikit-learn==1.5.1",
+    "numpy>=1.23,<2",
+    "pandas>=2.0,<2.3",
+    "scipy>=1.9",
+    "joblib>=1.2",
+    "matplotlib>=3.5",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+painpredict = "painpredict.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+painpredict = ["assets/*.json", "assets/*.joblib"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
