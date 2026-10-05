@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Research calculator for the preprocedural probability of NRS ≥ 4 at 24 hours after TACE. Values stay in the browser.">
+  <title>PainPredict-TACE</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div>
+      <p class="kicker" data-i18n="app.kicker">Clinical prediction model</p>
+      <h1 data-i18n="app.title">PainPredict-TACE</h1>
+      <p class="subtitle" data-i18n="app.subtitle">Preprocedural probability of NRS ≥ 4 at 24 hours after transarterial chemoembolization.</p>
+    </div>
+    <div class="languages" role="group" aria-label="Language">
+      <button type="button" data-locale="en" aria-pressed="true">English</button>
+      <button type="button" data-locale="zh" aria-pressed="false">中文</button>
+    </div>
+  </header>
+
+  <p class="notice" data-i18n="app.research">Research use only. This model was developed in one centre and assessed by repeated internal validation. It has not been externally validated or tested prospectively, and it must not be used alone to make clinical decisions.</p>
+
+  <main class="layout">
+    <form id="calculator" novalidate>
+      <h2 data-i18n="section.inputs">Predictors</h2>
+
+      <div class="field" data-field="Pre_PainScore">
+        <label for="Pre_PainScore" data-i18n="field.Pre_PainScore.label">Preprocedural pain</label>
+        <div class="control">
+          <input id="Pre_PainScore" name="Pre_PainScore" inputmode="numeric" autocomplete="off" spellcheck="false">
+          <span data-i18n="field.Pre_PainScore.unit">NRS, 0–10</span>
+        </div>
+        <p class="hint" data-hint></p>
+        <p class="feedback" data-feedback></p>
+      </div>
+
+      <div class="field" data-field="D-dimer">
+        <label for="D-dimer" data-i18n="field.D-dimer.label">D-dimer</label>
+        <div class="control">
+          <input id="D-dimer" name="D-dimer" inputmode="decimal" autocomplete="off" spellcheck="false">
+          <span data-i18n="field.D-dimer.unit">ng/mL</span>
+        </div>
+        <p class="hint" data-hint></p>
+        <p class="feedback" data-feedback></p>
+      </div>
+
+      <div class="field" data-field="AFP">
+        <label for="AFP" data-i18n="field.AFP.label">Alpha-fetoprotein</label>
+        <div class="control">
+          <input id="AFP" name="AFP" inputmode="decimal" autocomplete="off" spellcheck="false">
+          <span data-i18n="field.AFP.unit">ng/mL</span>
+        </div>
+        <p class="hint" data-hint></p>
+        <p class="feedback" data-feedback></p>
+      </div>
+
+      <div class="field" data-field="Albumin">
+        <label for="Albumin" data-i18n="field.Albumin.label">Albumin</label>
+        <div class="control">
+          <input id="Albumin" name="Albumin" inputmode="decimal" autocomplete="off" spellcheck="false">
+          <span data-i18n="field.Albumin.unit">g/L</span>
+        </div>
+        <p class="hint" data-hint></p>
+        <p class="feedback" data-feedback></p>
+      </div>
+
+      <div class="actions">
+        <button type="submit" data-i18n="action.calculate">Calculate</button>
+        <button type="button" id="example" data-i18n="action.example">Use example</button>
+        <button type="button" id="clear" data-i18n="action.clear">Clear</button>
+      </div>
+      <p id="example-note" class="hint" hidden data-i18n="example.note">These example values are synthetic illustrations. They do not describe a patient.</p>
+    </form>
+
+    <section class="result" aria-labelledby="result-heading">
+      <h2 id="result-heading" data-i18n="section.result">Result</h2>
+      <div id="result" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <section class="method">
+    <h2 data-i18n="section.method">Calculation</h2>
+    <p data-i18n="method.lead">The page loads the published model card and applies its raw-scale equation. A laboratory value is capped at the development bounds. If it is missing, the development median is substituted and the missing-indicator coefficient is added.</p>
+    <p data-i18n="method.risk">Probability = 1 / (1 + exp(−linear predictor)).</p>
+    <p id="performance"></p>
+  </section>
+
+  <section>
+    <h2 data-i18n="section.limitations">Limitations</h2>
+    <ul>
+      <li data-i18n="limitations.1">Developed and internally validated in one centre; performance elsewhere is unknown.</li>
+      <li data-i18n="limitations.2">No temporal, external or prospective impact evaluation has been performed.</li>
+      <li data-i18n="limitations.3">The coefficients are predictive associations, not causal effects.</li>
+      <li data-i18n="limitations.4">The 0.20 operating point is descriptive and is not a recommended treatment threshold.</li>
+      <li data-i18n="limitations.5">Preprocedural NRS in the development cohort was 0–3. Values beyond a capping bound contribute only the bound’s effect.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p data-i18n="footer.privacy">Calculation runs entirely in this browser. Predictor values are neither uploaded nor stored. This browser saves only the selected language.</p>
+    <p>
+      <a href="https://github.com/hahahaHan233/painpredict-tace" data-i18n="footer.source">Source code and model card</a>
+    </p>
+    <p data-i18n="footer.license">Code: MIT License. Figures and result tables: CC BY 4.0.</p>
+  </footer>
+
+  <noscript>
+    <p>JavaScript is required to load the published model card and calculate a probability in this browser.</p>
+  </noscript>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -16,6 +16,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
       - run: pip install -e ".[test]"
+      - run: node --test tests/web/test_calculator.mjs
       - run: pytest -q
       - run: painpredict predict examples/example_patients.csv

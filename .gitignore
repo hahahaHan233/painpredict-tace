@@ -27,3 +27,6 @@ data/
 
 # Local outputs from running the pipeline on your own data
 runs/
+
+# Generated GitHub Pages bundle
+site/

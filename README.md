@@ -12,6 +12,7 @@ PainPredict-TACE estimates the probability that a patient will report a numeric 
 
 - [Installation](#installation)
 - [Quick start](#quick-start)
+- [Web calculator](#web-calculator)
 - [Input variables](#input-variables)
 - [Model performance](#model-performance)
 - [Equation and nomogram](#equation-and-nomogram)
@@ -72,6 +73,23 @@ predict_risk(patients)
 ```
 
 `painpredict.model_card()` returns the coefficients, preprocessing settings and development summary as a dictionary. `painpredict.load_model()` returns the underlying scikit-learn pipeline.
+
+## Web calculator
+
+An English and Chinese calculator is published at:
+
+**<https://hahahahan233.github.io/painpredict-tace/>**
+
+The page loads [`model_card.json`](src/painpredict/assets/model_card.json) and evaluates the published equation locally. Predictor values are not uploaded. Preprocedural NRS is required and must be an integer from 0 to 10. D-dimer, AFP and albumin may be left blank; the page then applies the same median imputation, missing indicator and capping rules as the Python model. Impossible entries block calculation. Unusual magnitudes and values outside the development range produce a warning, and the result states the value the model actually uses. The 0.20 display is the reported operating point, not a treatment recommendation.
+
+To preview the page locally:
+
+```bash
+python scripts/build_web.py
+python -m http.server 8000 --directory site
+```
+
+Then open <http://127.0.0.1:8000/>.
 
 ## Input variables
 
@@ -196,8 +214,9 @@ results/              Cohort-level result tables from the development study
 figures/              Paper figures, one folder per format
   png/ pdf/ svg/
 examples/             Example input and synthetic demonstration cohort
-scripts/              Figure regeneration
-tests/                Test suite (runs on synthetic data only)
+web/                  Bilingual calculator source
+scripts/              Figure regeneration and static-site build
+tests/                Python and browser-model tests (synthetic data only)
 ```
 
 ## Limitations
