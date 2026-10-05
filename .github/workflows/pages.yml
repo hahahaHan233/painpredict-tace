@@ -26,6 +26,8 @@ jobs:
         with:
           python-version: "3.11"
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - run: python scripts/build_web.py
       - uses: actions/upload-pages-artifact@v3
         with:
